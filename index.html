@@ -4,17 +4,13 @@
     <meta charset="UTF-8" />
     <title>Open Events Calendar</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <style>
       :root {
-        --bg: #f3f4fb;
-        --bg-soft: #e5efff;
         --accent: #0068e5;
-        --accent-soft: rgba(0, 104, 229, 0.08);
         --text: #0f172a;
         --text-muted: #6b7280;
         --border: #d5d9e5;
-        --radius-lg: 18px;
-        --radius-pill: 999px;
         --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.12);
       }
 
@@ -26,22 +22,27 @@
         margin: 0;
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
           "Segoe UI", sans-serif;
-        background:
-          radial-gradient(circle at top left, #e0edff 0, #f8fafc 40%, #eef2ff 100%);
+        background: radial-gradient(
+          circle at top left,
+          #e0edff 0,
+          #f8fafc 40%,
+          #eef2ff 100%
+        );
         min-height: 100vh;
         color: var(--text);
       }
 
-      /* Decorative blob in background */
       body::before {
         content: "";
         position: fixed;
         inset: -120px auto auto 40%;
         width: 420px;
         height: 420px;
-        background: radial-gradient(circle, rgba(37, 99, 235, 0.18), transparent 60%);
-        opacity: 0.9;
-        pointer-events: none;
+        background: radial-gradient(
+          circle,
+          rgba(37, 99, 235, 0.18),
+          transparent 60%
+        );
         z-index: -1;
       }
 
@@ -50,11 +51,7 @@
         top: 0;
         z-index: 20;
         backdrop-filter: blur(18px);
-        background: linear-gradient(
-          to bottom,
-          rgba(248, 250, 252, 0.9),
-          rgba(248, 250, 252, 0.7)
-        );
+        background: rgba(248, 250, 252, 0.9);
         border-bottom: 1px solid rgba(226, 232, 240, 0.7);
       }
 
@@ -68,8 +65,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 16px;
-        padding-block: 14px;
+        padding: 14px 0;
       }
 
       .logo {
@@ -81,28 +77,25 @@
       .logo-mark {
         width: 36px;
         height: 36px;
-        border-radius: var(--radius-pill);
-        background: conic-gradient(from 140deg, #0068e5, #22c1c3, #4f46e5, #0068e5);
+        border-radius: 999px;
+        background: conic-gradient(
+          from 140deg,
+          #0068e5,
+          #22c1c3,
+          #4f46e5,
+          #0068e5
+        );
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #ffffff;
+        color: white;
         font-weight: 700;
-        font-size: 18px;
         box-shadow: 0 10px 26px rgba(37, 99, 235, 0.5);
-        transform: translateY(0);
-        transition: transform 160ms ease-out, box-shadow 160ms ease-out;
-      }
-
-      .logo-mark:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 16px 40px rgba(37, 99, 235, 0.65);
       }
 
       .brand-text h1 {
         margin: 0;
         font-size: 19px;
-        letter-spacing: 0.01em;
       }
 
       .tagline {
@@ -112,42 +105,26 @@
 
       .pill {
         padding: 5px 12px;
-        border-radius: var(--radius-pill);
+        border-radius: 999px;
         border: 1px solid rgba(148, 163, 184, 0.5);
         font-size: 11px;
-        white-space: nowrap;
-        background: rgba(255, 255, 255, 0.65);
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .pill-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 999px;
-        background: #22c55e;
+        background: white;
       }
 
       main {
-        padding-top: 10px;
-        padding-bottom: 32px;
+        padding: 14px 0 40px;
       }
 
       .hero {
-        margin-top: 12px;
-        margin-bottom: 18px;
         display: grid;
-        grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.6fr);
+        grid-template-columns: 2fr 1.3fr;
         gap: 16px;
-        align-items: center;
+        margin-bottom: 18px;
       }
 
       .hero-heading {
         font-size: 22px;
         font-weight: 600;
-        letter-spacing: 0.01em;
-        margin-bottom: 6px;
       }
 
       .hero-copy {
@@ -155,92 +132,45 @@
         color: var(--text-muted);
       }
 
-      .hero-copy strong {
-        color: var(--accent);
-        font-weight: 600;
-      }
-
       .hero-note {
         font-size: 12px;
-        color: var(--text-muted);
-        background: rgba(255, 255, 255, 0.8);
-        padding: 8px 10px;
-        border-radius: 10px;
-        border: 1px dashed rgba(148, 163, 184, 0.7);
         margin-top: 6px;
+        color: var(--text-muted);
       }
 
       .hint-card {
-        justify-self: end;
-        min-width: 220px;
-        max-width: 280px;
-        font-size: 12px;
-        color: var(--text-muted);
-        padding: 10px 12px;
+        background: white;
+        padding: 12px;
         border-radius: 14px;
-        background: rgba(255, 255, 255, 0.9);
         border: 1px solid rgba(148, 163, 184, 0.6);
-        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-      }
-
-      .hint-title {
         font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 4px;
-        color: #111827;
-      }
-
-      .hint-card ul {
-        margin: 4px 0 0;
-        padding-left: 17px;
-      }
-
-      .hint-card li {
-        margin: 2px 0;
       }
 
       .calendar-shell {
-        background: rgba(255, 255, 255, 0.96);
+        background: white;
         border-radius: 24px;
         box-shadow: var(--shadow-soft);
         border: 1px solid rgba(148, 163, 184, 0.55);
         overflow: hidden;
-        backdrop-filter: blur(8px);
       }
 
       iframe {
-        border: 0;
         width: 100%;
         height: 720px;
+        border: none;
       }
 
       .meta-row {
-        margin-top: 10px;
+        margin-top: 8px;
         font-size: 11px;
-        color: var(--text-muted);
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .meta-row span {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-      }
-
-      .meta-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 999px;
-        background: var(--accent-soft);
-        border: 1px solid rgba(37, 99, 235, 0.4);
+        color: var(--text-muted);
       }
 
       footer {
         border-top: 1px solid rgba(226, 232, 240, 0.8);
-        padding-block: 10px 18px;
+        padding: 14px 0;
         font-size: 11px;
         color: var(--text-muted);
       }
@@ -248,56 +178,80 @@
       .footer-inner {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        gap: 10px;
         flex-wrap: wrap;
       }
 
-      .footer-link {
-        text-decoration: none;
-        color: var(--accent);
-        font-weight: 500;
-      }
-
       @media (max-width: 768px) {
-        .header-inner {
-          padding-block: 10px;
+        .hero {
+          grid-template-columns: 1fr;
         }
-
+        iframe {
+          height: 550px;
+        }
         .pill {
           display: none;
         }
-
-        .hero {
-          grid-template-columns: minmax(0, 1fr);
-          gap: 10px;
-        }
-
-        .hero-heading {
-          font-size: 18px;
-        }
-
-        iframe {
-          height: 560px;
-        }
       }
 
-      @media (max-width: 480px) {
-        .hero-heading {
-          font-size: 17px;
-        }
+      /* ✅ ORANGE QUICKSERVE PROMO TOAST */
+      .promo-toast {
+        position: fixed;
+        bottom: 18px;
+        right: 18px;
+        max-width: 300px;
+        padding: 10px 12px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #ff7a00, #ff9f45);
+        color: #1f2933;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 14px 30px rgba(255, 122, 0, 0.45);
+        z-index: 999;
+        transform: translateY(8px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 160ms ease, transform 160ms ease;
+      }
 
-        .hero-copy {
-          font-size: 13px;
-        }
+      .promo-toast--visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
 
-        .hint-card {
-          justify-self: stretch;
-        }
+      .promo-toast__pill {
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.85);
+        color: #ff7a00;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .promo-toast__close {
+        margin-left: auto;
+        border: none;
+        background: rgba(255, 255, 255, 0.4);
+        color: #1f2933;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 999px;
+        width: 22px;
+        height: 22px;
       }
     </style>
   </head>
+
   <body>
+    <!-- ✅ Quickserve Promo Toast -->
+    <div class="promo-toast" id="promo-toast">
+      <div class="promo-toast__pill">Hungry?</div>
+      <div>Order food from <strong>Quickserve</strong>. Thanks!</div>
+      <button class="promo-toast__close" id="promo-toast-close">×</button>
+    </div>
+
     <header>
       <div class="shell header-inner">
         <div class="logo">
@@ -307,10 +261,7 @@
             <div class="tagline">A single public view of everything happening.</div>
           </div>
         </div>
-        <div class="pill">
-          <span class="pill-dot"></span>
-          Public · Read-only · No login
-        </div>
+        <div class="pill">Public · Read-only · No login</div>
       </div>
     </header>
 
@@ -319,56 +270,42 @@
         <div>
           <div class="hero-heading">See every upcoming event in one place.</div>
           <p class="hero-copy">
-            This calendar is curated by the organizers and kept up to date. Just
-            <strong>browse by month</strong>, click any event, and you’ll see
-            all the details—time, location, and description.
+            Browse by month, click any event and see full details instantly.
           </p>
-          <div class="hero-note">
-            Changes are made behind the scenes. If something looks off, reach out
-            to the organizing team and they’ll update it here.
-          </div>
+          <div class="hero-note">Updates are managed by the organizers.</div>
         </div>
-        <aside class="hint-card">
-          <div class="hint-title">How to use this</div>
+
+        <div class="hint-card">
+          <strong>How to use</strong>
           <ul>
-            <li>Use tabs to switch Month / Week / Agenda views.</li>
-            <li>Click an event once to see details.</li>
-            <li>Use the arrows on the top bar to move between months.</li>
+            <li>Switch Month / Week views</li>
+            <li>Click any event for details</li>
           </ul>
-        </aside>
+        </div>
       </section>
 
       <section class="calendar-shell">
-        <!-- 🔁 Replace ONLY the src value with the embed URL from Google Calendar -->
         <iframe
           src="https://calendar.google.com/calendar/embed?src=095b20f1c4a150f1986c1e12b5e9b7c4dc510387b67a52da77f4f9b576758a73%40group.calendar.google.com&ctz=Asia%2FKolkata"
-          frameborder="0"
-          scrolling="no"
         ></iframe>
       </section>
 
       <div class="meta-row">
-        <span>
-          <span class="meta-dot"></span>
-          Events are maintained by the organizers.
-        </span>
-        <span>
-          Last updated:
-          <strong id="last-updated"></strong>
-        </span>
+        <span>Events are maintained by organizers</span>
+        <span>Last updated: <strong id="last-updated"></strong></span>
       </div>
     </main>
 
     <footer>
       <div class="shell footer-inner">
-        <span>Viewing only · No data is collected from you.</span>
-        <span>
-          Powered by a shared Google Calendar.
-        </span>
+        <span>Viewing only · No data is collected</span>
+        <span>Powered by Google Calendar</span>
       </div>
     </footer>
 
+    <!-- ✅ JS (UPDATED FIXED VERSION) -->
     <script>
+      // Last updated
       const el = document.getElementById("last-updated");
       if (el) {
         const now = new Date();
@@ -378,6 +315,27 @@
           year: "numeric",
         });
       }
+
+      // Promo Toast Logic (FIXED)
+      const toast = document.getElementById("promo-toast");
+      const toastClose = document.getElementById("promo-toast-close");
+      const HIDE_KEY = "hideQuickserveToast_v2"; // ✅ NEW KEY
+
+      function showToast() {
+        if (localStorage.getItem(HIDE_KEY) === "1") return;
+        setTimeout(() => {
+          toast.classList.add("promo-toast--visible");
+        }, 600);
+      }
+
+      function hideToast() {
+        toast.classList.remove("promo-toast--visible");
+        localStorage.setItem(HIDE_KEY, "1");
+      }
+
+      toastClose.addEventListener("click", hideToast);
+      showToast();
     </script>
   </body>
 </html>
+
