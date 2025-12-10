@@ -303,7 +303,7 @@
       </div>
     </footer>
 
-    <!-- ✅ JS (UPDATED FIXED VERSION) -->
+    <!-- ✅ FINAL JS -->
     <script>
       // Last updated
       const el = document.getElementById("last-updated");
@@ -316,13 +316,11 @@
         });
       }
 
-      // Promo Toast Logic (FIXED)
+      // ✅ Promo Toast Logic (ALWAYS shows on refresh)
       const toast = document.getElementById("promo-toast");
       const toastClose = document.getElementById("promo-toast-close");
-      const HIDE_KEY = "hideQuickserveToast_v2"; // ✅ NEW KEY
 
       function showToast() {
-        if (localStorage.getItem(HIDE_KEY) === "1") return;
         setTimeout(() => {
           toast.classList.add("promo-toast--visible");
         }, 600);
@@ -330,7 +328,6 @@
 
       function hideToast() {
         toast.classList.remove("promo-toast--visible");
-        localStorage.setItem(HIDE_KEY, "1");
       }
 
       toastClose.addEventListener("click", hideToast);
@@ -338,4 +335,3 @@
     </script>
   </body>
 </html>
-
